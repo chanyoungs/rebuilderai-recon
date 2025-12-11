@@ -37,7 +37,11 @@ pip install peft==0.17.1 transformers==4.44.2 open3d
 ```
 
 ## Repo modifications
-Required the following snippet to be added to the end of the file `trellis/pipelines/trellis_image_to_3d.py`:
+In order to fix the following runtime error:
+```
+RuntimeError: FlashAttention only support fp16 and bf16 data type
+```
+Add the following snippet to the end of the file `trellis/pipelines/trellis_image_to_3d.py`:
 ```python
 # Convert models to fp16 to support FlashAttention
 new_pipeline.models['sparse_structure_vggt_cond'].convert_to_fp16()
@@ -862,3 +866,7 @@ INFO- Loaded 9863 vertices and 19724 faces.
 100% done
 Rendering: 30it [00:00, 117.25it/s]
 ```
+
+## Dev Time
+Start: 2025/12/11 10:37
+End: 2025/12/11 13:35

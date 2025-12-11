@@ -1,0 +1,59 @@
+{
+    "camera_angle_x": 0.85,
+    "frames": [
+        {
+            "file_path": "./train/front.png",
+            "transform_matrix": [
+                [1, 0, 0, 0],
+                [0, 1, 0, 0],
+                [0, 0, 1, 3.0],
+                [0, 0, 0, 1]
+            ]
+        },
+        {
+            "file_path": "./train/back.png",
+            "transform_matrix": [
+                [-1, 0, 0, 0],
+                [0, 1, 0, 0],
+                [0, 0, -1, -3.0],
+                [0, 0, 0, 1]
+            ]
+        },
+        {
+            "file_path": "./train/left.png",
+            "transform_matrix": [
+                [0, 0, 1, 3.0],
+                [0, 1, 0, 0],
+                [-1, 0, 0, 0],
+                [0, 0, 0, 1]
+            ]
+        },
+        {
+            "file_path": "./train/right.png",
+            "transform_matrix": [
+                [0, 0, -1, -3.0],
+                [0, 1, 0, 0],
+                [1, 0, 0, 0],
+                [0, 0, 0, 1]
+            ]
+        },
+        {
+            "file_path": "./train/top.png",
+            "transform_matrix": [
+                [1, 0, 0, 0],
+                [0, 0, 1, 3.0],
+                [0, -1, 0, 0],
+                [0, 0, 0, 1]
+            ]
+        },
+        {
+            "file_path": "./train/bottom.png",
+            "transform_matrix": [
+                [1, 0, 0, 0],
+                [0, 0, -1, -3.0],
+                [0, 1, 0, 0],
+                [0, 0, 0, 1]
+            ]
+        }
+    ]
+}
