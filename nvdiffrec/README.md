@@ -1,11 +1,13 @@
 # [nvdiffrec](https://github.com/NVlabs/nvdiffrec)
 
 ## Page Navigation
-- [Home](../README.md)
-- [ReconViaGen](../ReconViaGen/notes.md)
-- [nvdiffrec](./nvdiffrec/notes.md)
+
+-   [Home](../README.md)
+-   [ReconViaGen](../ReconViaGen/README.md)
+-   [nvdiffrec](./nvdiffrec/README.md)
 
 ## Installation notes
+
 ```bash
 conda create -n dmodel python=3.10 -y
 activate dmodel
@@ -17,7 +19,7 @@ pip install git+https://github.com/NVlabs/tiny-cuda-nn#subdirectory=bindings/tor
 
 ### If tiny-cuda-nn installation fails (C++17 issue on RTX 3060), do the following steps:
 
-1. ```git clone --recursive https://github.com/NVlabs/tiny-cuda-nn```
+1. `git clone --recursive https://github.com/NVlabs/tiny-cuda-nn`
 1. Patch setup.py (Force C++17) Run this command to replace the 14 with 17 in the bindings setup file you just shared:
 
     ```bash
@@ -48,9 +50,11 @@ pip install git+https://github.com/NVlabs/tiny-cuda-nn#subdirectory=bindings/tor
 ## Data Preparation
 
 ### Removing the background
+
 I used the depth map images provided in the dataset to create masks and remove the background from the RGB images creating a [process_images.py](../utils/process_images.py) script. The required process was:
-- Match(by upscaling) the resolution of depth maps to the RGB images.
-- I used 0 value pixels in the depth maps as the background and made those pixels transparent in the RGB images.
+
+-   Match(by upscaling) the resolution of depth maps to the RGB images.
+-   I used 0 value pixels in the depth maps as the background and made those pixels transparent in the RGB images.
 
 <table width="100%">
   <tr>
@@ -66,6 +70,7 @@ I used the depth map images provided in the dataset to create masks and remove t
 </table>
 
 ## transforms.json
+
 ```json
 {
     "camera_angle_x": 0.85,
@@ -129,9 +134,11 @@ I used the depth map images provided in the dataset to create masks and remove t
 ```
 
 #### camera_angle_x
+
 Field of view in radians. A typical FOV with mild distortion is around 49 degrees (0.85 radians).
 
 #### transform_matrix
+
 NeRF's Pose Matrix (Camera-to-World) 4x4 transformation matrix.
 
 The Camera-to-World Matrix ($\mathbf{M}_{c2w}$)$$\mathbf{M}_{c2w} = 
@@ -143,19 +150,21 @@ The Camera-to-World Matrix ($\mathbf{M}_{c2w}$)$$\mathbf{M}_{c2w} =
 \end{bmatrix}$$
 
 1. Column 4: The Position ($\mathbf{t}$)
-    
+
     The last column ($\mathbf{t}$) represents the Camera's Translation (position) in world space.
-    
+
 2. Columns 1-3: The Orientation (Rotation)
 
     The first three columns represent the camera's local axes—Right, Up, and Back—expressed in World Coordinates.
+
     - Column 1 ($\mathbf{r}$): The Right Vector. This vector points to the immediate right of the camera.
     - Column 2 ($\mathbf{u}$): The Up Vector. This vector points directly out of the top of the camera.
     - Column 3 ($\mathbf{b}$): The Backward Vector. This requires special attention regarding conventions:
-    
+
 I created a [check_cameras.py](../utils/check_cameras.py) util script to plot the matrices to visualize the camera poses. This helped to verify that the images were aligned correctly with the camera poses except the `top` view which was upside down. I fixed this by reversing the rotation matrix for the top view as follows:
 
 From
+
 ```
 [
     [1, 0, 0, 0],
@@ -164,7 +173,9 @@ From
     [0, 0, 0, 1]
 ]
 ```
+
 To
+
 ```
 [
     [-1, 0, 0, 0],
@@ -180,6 +191,7 @@ Resulting in:
 The `3` in the translation vector represents the distance of the camera from the origin along the Z-axis. I chose this value based on trial and improvement(1~4) to ensure that the object fit well within the camera's view.
 
 ### Config file
+
 ```json
 {
     "ref_mesh": "data/shoe",
@@ -190,35 +202,45 @@ The `3` in the translation vector represents the distance of the camera from the
     "train_res": [1024, 1024],
     "batch": 2,
     "learning_rate": [0.03, 0.01],
-    "ks_min" : [0, 0.08, 0.0],
-    "dmtet_grid" : 128,
-    "mesh_scale" : 2.1,
-    "laplace_scale" : 3000,
-    "display": [{"latlong" : true}, {"bsdf" : "kd"}, {"bsdf" : "ks"}, {"bsdf" : "normal"}],
-    "background" : "white",
+    "ks_min": [0, 0.08, 0.0],
+    "dmtet_grid": 128,
+    "mesh_scale": 2.1,
+    "laplace_scale": 3000,
+    "display": [
+        { "latlong": true },
+        { "bsdf": "kd" },
+        { "bsdf": "ks" },
+        { "bsdf": "normal" }
+    ],
+    "background": "white",
     "out_dir": "shoe_5000iter_d3_1024"
 }
 ```
 
-
 ## System requirements
+
 On my RTX 3060 laptop GPU with 12GB VRAM, I had to limit the training resolution from 2048x2048 to 1024x1024 and batch size from 6 to 2 to avoid out-of-memory errors.
 
 ## Output
 
 ### Training process:
+
 ![Training](./outputs/training.gif)
 
 ### Output model preview
+
 ![Preview](./outputs/model.gif)
 
 ### Online viewer
+
 Click [HERE](https://3dviewer.net/index.html#model=https://cdn.jsdelivr.net/gh/chanyoungs/rebuilderai-recon@main/nvdiffrec/outputs/shoe_5000iter_d3_1024/mesh/mesh.obj,https://cdn.jsdelivr.net/gh/chanyoungs/rebuilderai-recon@main/nvdiffrec/outputs/shoe_5000iter_d3_1024/mesh/mesh.mtl,https://cdn.jsdelivr.net/gh/chanyoungs/rebuilderai-recon@main/nvdiffrec/outputs/shoe_5000iter_d3_1024/mesh/texture_kd.png,https://cdn.jsdelivr.net/gh/chanyoungs/rebuilderai-recon@main/nvdiffrec/outputs/shoe_5000iter_d3_1024/mesh/texture_ks.png,https://cdn.jsdelivr.net/gh/chanyoungs/rebuilderai-recon@main/nvdiffrec/outputs/shoe_5000iter_d3_1024/mesh/texture_kn.png)
 
 ### Download model
+
 Click [HERE](https://cdn.jsdelivr.net/gh/chanyoungs/rebuilderai-recon@main/nvdiffrec/outputs/shoe_5000iter_d3_1024/mesh/shoe_nvdiffrec.zip)
 
 ## Dev time
+
 ~10 hours
 
 ## [Return to main](../README.md)

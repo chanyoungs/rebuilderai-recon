@@ -1,18 +1,18 @@
 # RebuilderAI - 송찬영 과제
 
 ## Page Navigation
-- [Home](./README.md)
-- [ReconViaGen](./ReconViaGen/notes.md)
-- [nvdiffrec](./nvdiffrec/notes.md)
 
+-   [Home](./README.md)
+-   [ReconViaGen](./ReconViaGen/README.md)
+-   [nvdiffrec](./nvdiffrec/README.md)
 
 ## Task
 
 "첨부드린 다시점 이미지에 대해 아래 두 모델을 돌려서 textured mesh를 각각 취득해 보는 과업입니다.
 각 이미지는 에셋을 중앙에 배치하고 정확한 +x, -x, +y, -y, +z, -z 축 방향 perspective camera로 렌더링되었습니다."
 
-- https://github.com/estheryang11/ReconViaGen
-- https://github.com/NVlabs/nvdiffrec
+-   https://github.com/estheryang11/ReconViaGen
+-   https://github.com/NVlabs/nvdiffrec
 
 ## Input data
 
