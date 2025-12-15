@@ -1,5 +1,9 @@
 # [ReconViaGen](https://github.com/estheryang11/ReconViaGen)
-![Screenshot](outputs/screenshot.png)
+
+## Page Navigation
+- [Home](../README.md)
+- [ReconViaGen](./ReconViaGen/notes.md)
+- [nvdiffrec](../nvdiffrec/notes.md)
 
 ## Installation notes
 ReconViaGen
@@ -55,16 +59,20 @@ new_pipeline.models['slat_flow_model'].convert_to_fp16()
 Required 30GB VRAM & 30GB RAM - Ended up using NVIDIA L4050 with 48GB VRAM and 128GB RAM on the cloud.
 
 ## Output
+![Screenshot](outputs/screenshot.png)
+
 <video autoplay loop muted playsinline>
   <source src="outputs/sample.mp4" type="video/mp4">
 </video>
 
-Click [HERE](https://3dviewer.net/#model=https://cdn.jsdelivr.net/gh/chanyoungs/rebuilderai-recon@main/ReconViaGen/outputs/sample.glb) to see the interactive model viewer.
+### Online viewer
+Click [HERE](https://3dviewer.net/#model=https://cdn.jsdelivr.net/gh/chanyoungs/rebuilderai-recon@main/ReconViaGen/outputs/sample.glb)
 
-Click [HERE](https://cdn.jsdelivr.net/gh/chanyoungs/rebuilderai-recon@main/ReconViaGen/outputs/sample.glb) to download the 3D model.
+### Download model
+Click [HERE](https://cdn.jsdelivr.net/gh/chanyoungs/rebuilderai-recon@main/ReconViaGen/outputs/sample.glb)
 
 ## Dev Time
-- 3 Hours
+~ 3 Hours
 
 ## Terminal output
 <details>

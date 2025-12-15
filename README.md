@@ -1,5 +1,11 @@
 # RebuilderAI - 송찬영 과제
 
+## Page Navigation
+- [Home](./README.md)
+- [ReconViaGen](./ReconViaGen/notes.md)
+- [nvdiffrec](./nvdiffrec/notes.md)
+
+
 ## Task
 
 "첨부드린 다시점 이미지에 대해 아래 두 모델을 돌려서 textured mesh를 각각 취득해 보는 과업입니다.
@@ -49,8 +55,3 @@
     <td align="center"><img src="./input/masks/bottom.png" width="100%" alt="Bottom Mask"></td>
   </tr>
 </table>
-
-## Output Results
-
--   [ReconViaGen](./ReconViaGen/notes.md)
--   [nvdiffrec](./nvdiffrec/notes.md)

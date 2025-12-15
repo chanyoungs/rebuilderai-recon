@@ -1,4 +1,9 @@
-# nvdiffrec
+# [nvdiffrec](https://github.com/NVlabs/nvdiffrec)
+
+## Page Navigation
+- [Home](../README.md)
+- [ReconViaGen](../ReconViaGen/notes.md)
+- [nvdiffrec](./nvdiffrec/notes.md)
 
 ## Installation notes
 ```bash
@@ -213,5 +218,7 @@ Click [HERE](https://3dviewer.net/index.html#model=https://cdn.jsdelivr.net/gh/c
 ### Download model
 Click [HERE](https://cdn.jsdelivr.net/gh/chanyoungs/rebuilderai-recon@main/nvdiffrec/outputs/shoe_5000iter_d3_1024/mesh/shoe_nvdiffrec.zip)
 
-# Dev time
+## Dev time
 ~10 hours
+
+## [Return to main](../README.md)
