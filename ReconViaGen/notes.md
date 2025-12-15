@@ -1,4 +1,5 @@
-# ReconViaGen
+# [ReconViaGen](https://github.com/estheryang11/ReconViaGen)
+![Screenshot](outputs/screenshot.png)
 
 ## Installation notes
 ReconViaGen
@@ -51,12 +52,11 @@ new_pipeline.models['slat_flow_model'].convert_to_fp16()
 ```
 
 ## System requirements
-Required 30GB VRAM & 30GB RAM
-
+Required 30GB VRAM & 30GB RAM - Ended up using NVIDIA L4050 with 48GB VRAM and 128GB RAM on the cloud.
 
 ## Terminal output
-```
-⚡ main ~/ReconViaGen python app_fine.py
+<div style="height: 50vh; overflow-y: auto; border: 1px solid #ccc;">
+python app_fine.py
 [SPARSE] Backend: spconv, Attention: flash_attn
 [SPARSE][CONV] spconv algo: native
 Warning, cannot find cuda-compiled version of RoPE2D, using a slow pytorch version instead
@@ -865,8 +865,16 @@ INFO- Loaded 9863 vertices and 19724 faces.
 
 100% done
 Rendering: 30it [00:00, 117.25it/s]
-```
+</div>
+
+## Output
+<video autoplay loop muted playsinline>
+  <source src="outputs/sample.mp4" type="video/mp4">
+</video>
+
+Click [HERE](https://playcanvas.com/model-viewer?load=https://cdn.jsdelivr.net/gh/chanyoungs/rebuilderai-recon@main/ReconViaGen/outputs/sample.glb) to see the interactive model viewer.
+
+Click [HERE](https://cdn.jsdelivr.net/gh/chanyoungs/rebuilderai-recon@main/ReconViaGen/outputs/sample.glb) to download the 3D model.
 
 ## Dev Time
-Start: 2025/12/11 10:37
-End: 2025/12/11 13:35
+- 3 Hours

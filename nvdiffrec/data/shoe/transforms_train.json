@@ -2,55 +2,55 @@
     "camera_angle_x": 0.85,
     "frames": [
         {
-            "file_path": "./train/front.png",
+            "file_path": "./train/front",
             "transform_matrix": [
                 [1, 0, 0, 0],
                 [0, 1, 0, 0],
-                [0, 0, 1, 3.0],
+                [0, 0, 1, 3],
                 [0, 0, 0, 1]
             ]
         },
         {
-            "file_path": "./train/back.png",
+            "file_path": "./train/back",
             "transform_matrix": [
                 [-1, 0, 0, 0],
                 [0, 1, 0, 0],
-                [0, 0, -1, -3.0],
+                [0, 0, -1, -3],
                 [0, 0, 0, 1]
             ]
         },
         {
-            "file_path": "./train/left.png",
+            "file_path": "./train/left",
             "transform_matrix": [
-                [0, 0, 1, 3.0],
+                [0, 0, 1, 3],
                 [0, 1, 0, 0],
                 [-1, 0, 0, 0],
                 [0, 0, 0, 1]
             ]
         },
         {
-            "file_path": "./train/right.png",
+            "file_path": "./train/right",
             "transform_matrix": [
-                [0, 0, -1, -3.0],
+                [0, 0, -1, -3],
                 [0, 1, 0, 0],
                 [1, 0, 0, 0],
                 [0, 0, 0, 1]
             ]
         },
         {
-            "file_path": "./train/top.png",
+            "file_path": "./train/top",
             "transform_matrix": [
-                [1, 0, 0, 0],
-                [0, 0, 1, 3.0],
-                [0, -1, 0, 0],
+                [-1, 0, 0, 0],
+                [0, 0, 1, 3],
+                [0, 1, 0, 0],
                 [0, 0, 0, 1]
             ]
         },
         {
-            "file_path": "./train/bottom.png",
+            "file_path": "./train/bottom",
             "transform_matrix": [
                 [1, 0, 0, 0],
-                [0, 0, -1, -3.0],
+                [0, 0, -1, -3],
                 [0, 1, 0, 0],
                 [0, 0, 0, 1]
             ]
