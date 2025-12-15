@@ -208,16 +208,10 @@ On my RTX 3060 laptop GPU with 12GB VRAM, I had to limit the training resolution
 ![Preview](./outputs/model.gif)
 
 ### Online viewer
-Click [HERE]
+Click [HERE](https://3dviewer.net/index.html#model=https://cdn.jsdelivr.net/gh/chanyoungs/rebuilderai-recon@main/nvdiffrec/outputs/shoe_5000iter_d3_1024/mesh/mesh.obj,https://cdn.jsdelivr.net/gh/chanyoungs/rebuilderai-recon@main/nvdiffrec/outputs/shoe_5000iter_d3_1024/mesh/mesh.mtl,https://cdn.jsdelivr.net/gh/chanyoungs/rebuilderai-recon@main/nvdiffrec/outputs/shoe_5000iter_d3_1024/mesh/texture_kd.png,https://cdn.jsdelivr.net/gh/chanyoungs/rebuilderai-recon@main/nvdiffrec/outputs/shoe_5000iter_d3_1024/mesh/texture_ks.png,https://cdn.jsdelivr.net/gh/chanyoungs/rebuilderai-recon@main/nvdiffrec/outputs/shoe_5000iter_d3_1024/mesh/texture_kn.png)
 
 ### Download model
+Click [HERE](https://cdn.jsdelivr.net/gh/chanyoungs/rebuilderai-recon@main/nvdiffrec/outputs/shoe_5000iter_d3_1024/mesh/shoe_nvdiffrec.zip)
 
-# Time
-Start: 2025/12/11 13:35
-Pause: 2025/12/11 18:47
-Start: 2025/12/11 23:40
-
-46 back
-71 front
-59 right
-20 left
+# Dev time
+~10 hours
