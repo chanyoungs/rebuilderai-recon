@@ -37,7 +37,7 @@ Change peft and transformers versions
 pip install peft==0.17.1 transformers==4.44.2 open3d
 ```
 
-## Repo modifications
+## Codebase modifications
 In order to fix the following runtime error:
 ```
 RuntimeError: FlashAttention only support fp16 and bf16 data type
@@ -872,7 +872,7 @@ Rendering: 30it [00:00, 117.25it/s]
   <source src="outputs/sample.mp4" type="video/mp4">
 </video>
 
-Click [HERE](https://playcanvas.com/model-viewer?load=https://cdn.jsdelivr.net/gh/chanyoungs/rebuilderai-recon@main/ReconViaGen/outputs/sample.glb) to see the interactive model viewer.
+Click [HERE](https://3dviewer.net/#model=https://cdn.jsdelivr.net/gh/chanyoungs/rebuilderai-recon@main/ReconViaGen/outputs/sample.glb) to see the interactive model viewer.
 
 Click [HERE](https://cdn.jsdelivr.net/gh/chanyoungs/rebuilderai-recon@main/ReconViaGen/outputs/sample.glb) to download the 3D model.
 

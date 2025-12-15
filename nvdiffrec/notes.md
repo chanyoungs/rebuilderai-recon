@@ -40,26 +40,25 @@ pip install git+https://github.com/NVlabs/tiny-cuda-nn#subdirectory=bindings/tor
     pip install . --no-build-isolation
     ```
 
-## Config file
-```json
-{
-    "ref_mesh": "data/shoe",
-    "random_textures": true,
-    "iter": 5000,
-    "save_interval": 100,
-    "texture_res": [1024, 1024],
-    "train_res": [1024, 1024],
-    "batch": 2,
-    "learning_rate": [0.03, 0.01],
-    "ks_min" : [0, 0.08, 0.0],
-    "dmtet_grid" : 128,
-    "mesh_scale" : 2.1,
-    "laplace_scale" : 3000,
-    "display": [{"latlong" : true}, {"bsdf" : "kd"}, {"bsdf" : "ks"}, {"bsdf" : "normal"}],
-    "background" : "white",
-    "out_dir": "shoe_5000iter_d3_1024"
-}
-```
+## Data Preparation
+
+### Removing the background
+I used the depth map images provided in the dataset to create masks and remove the background from the RGB images creating a [process_images.py](../utils/process_images.py) script. The required process was:
+- Match(by upscaling) the resolution of depth maps to the RGB images.
+- I used 0 value pixels in the depth maps as the background and made those pixels transparent in the RGB images.
+
+<table width="100%">
+  <tr>
+    <th width="33%"><div align="center">Original</div></th>
+    <th width="33%"><div align="center">Depth map</div></th>
+    <th width="33%"><div align="center">Background removed</div></th>
+  </tr>
+  <tr>
+    <td align="center"><img src="../input/multi_views/left.png" width="100%" alt="Front"></td>
+    <td align="center"><img src="../input/masks/left.png" width="100%" alt="Back"></td>
+    <td align="center" style="background-color: green;"><img src="../input/multi_views_alpha/left.png" width="100%" alt="Left"></td>
+  </tr>
+</table>
 
 ## transforms.json
 ```json
@@ -124,8 +123,94 @@ pip install git+https://github.com/NVlabs/tiny-cuda-nn#subdirectory=bindings/tor
 }
 ```
 
-- camera_angle_x: Field of view in radians. A typical FOV with mild distortion is around 49 degrees (0.85 radians).
-- transform_matrix: 4x4 transformation matrix for camera pose
+#### camera_angle_x
+Field of view in radians. A typical FOV with mild distortion is around 49 degrees (0.85 radians).
+
+#### transform_matrix
+NeRF's Pose Matrix (Camera-to-World) 4x4 transformation matrix.
+
+The Camera-to-World Matrix ($\mathbf{M}_{c2w}$)$$\mathbf{M}_{c2w} = 
+\begin{bmatrix}
+\mathbf{r}_x & \mathbf{u}_x & \mathbf{b}_x & \mathbf{t}_x \\
+\mathbf{r}_y & \mathbf{u}_y & \mathbf{b}_y & \mathbf{t}_y \\
+\mathbf{r}_z & \mathbf{u}_z & \mathbf{b}_z & \mathbf{t}_z \\
+0 & 0 & 0 & 1
+\end{bmatrix}$$
+
+1. Column 4: The Position ($\mathbf{t}$)
+    
+    The last column ($\mathbf{t}$) represents the Camera's Translation (position) in world space.
+    
+2. Columns 1-3: The Orientation (Rotation)
+
+    The first three columns represent the camera's local axes—Right, Up, and Back—expressed in World Coordinates.
+    - Column 1 ($\mathbf{r}$): The Right Vector. This vector points to the immediate right of the camera.
+    - Column 2 ($\mathbf{u}$): The Up Vector. This vector points directly out of the top of the camera.
+    - Column 3 ($\mathbf{b}$): The Backward Vector. This requires special attention regarding conventions:
+    
+I created a [check_cameras.py](../utils/check_cameras.py) util script to plot the matrices to visualize the camera poses. This helped to verify that the images were aligned correctly with the camera poses except the `top` view which was upside down. I fixed this by reversing the rotation matrix for the top view as follows:
+
+From
+```
+[
+    [1, 0, 0, 0],
+    [0, 0, -1, -3],
+    [0, 1, 0, 0],
+    [0, 0, 0, 1]
+]
+```
+To
+```
+[
+    [-1, 0, 0, 0],
+    [0, 0, -1, -3],
+    [0, -1, 0, 0],
+    [0, 0, 0, 1]
+]
+```
+
+Resulting in:
+![Camera Poses](./outputs/camera_poses.gif)
+
+The `3` in the translation vector represents the distance of the camera from the origin along the Z-axis. I chose this value based on trial and improvement(1~4) to ensure that the object fit well within the camera's view.
+
+### Config file
+```json
+{
+    "ref_mesh": "data/shoe",
+    "random_textures": true,
+    "iter": 5000,
+    "save_interval": 100,
+    "texture_res": [1024, 1024],
+    "train_res": [1024, 1024],
+    "batch": 2,
+    "learning_rate": [0.03, 0.01],
+    "ks_min" : [0, 0.08, 0.0],
+    "dmtet_grid" : 128,
+    "mesh_scale" : 2.1,
+    "laplace_scale" : 3000,
+    "display": [{"latlong" : true}, {"bsdf" : "kd"}, {"bsdf" : "ks"}, {"bsdf" : "normal"}],
+    "background" : "white",
+    "out_dir": "shoe_5000iter_d3_1024"
+}
+```
+
+
+## System requirements
+On my RTX 3060 laptop GPU with 12GB VRAM, I had to limit the training resolution from 2048x2048 to 1024x1024 and batch size from 6 to 2 to avoid out-of-memory errors.
+
+## Output
+
+### Training process:
+![Training](./outputs/training.gif)
+
+### Output model preview
+![Preview](./outputs/model.gif)
+
+### Online viewer
+Click [HERE]
+
+### Download model
 
 # Time
 Start: 2025/12/11 13:35
